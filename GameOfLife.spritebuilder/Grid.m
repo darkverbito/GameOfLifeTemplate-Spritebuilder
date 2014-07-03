@@ -29,7 +29,7 @@ static const int GRID_COLUMNS = 10;
     self.userInteractionEnabled = YES;
 }
 
-- (void) evolveStep
+- (void)evolveStep
 {
     //update each Creature's neighbor count
     [self countNeighbors];
@@ -41,7 +41,7 @@ static const int GRID_COLUMNS = 10;
     _generation++;
 }
 
-- (void) updateCreatures
+- (void)updateCreatures
 {
     int numAlive = 0;
     
@@ -73,7 +73,7 @@ static const int GRID_COLUMNS = 10;
 }
 
 
-- (void) countNeighbors
+- (void)countNeighbors
 {
     // iterate through the rows
     // note that NSArray has a method 'count' that will return the number of elements in the array
