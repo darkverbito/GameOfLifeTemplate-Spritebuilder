@@ -56,14 +56,22 @@ static const int GRID_COLUMNS = 10;
             Creature *currentCreature = _gridArray[i][j];
             int livingNeighbors = currentCreature.livingNeighbors;
             
-            switch (livingNeighbors) {
-                case 3:
-                    currentCreature.isAlive = TRUE;
-                    numAlive++;
-                    break;
-                default:
-                    currentCreature.isAlive = FALSE;
-                    break;
+            //switch (livingNeighbors) {
+            //    case 3:
+            //        currentCreature.isAlive = TRUE;
+            //        numAlive++;
+            //        break;
+            //    default:
+            //        currentCreature.isAlive = FALSE;
+            //        break;
+            //}
+            
+            if(livingNeighbors == 3) {
+                currentCreature.isAlive = TRUE;
+            }
+            else if (livingNeighbors <= 1 || livingNeighbors >= 4)
+            {
+                currentCreature.isAlive = FALSE;
             }
             
         }
