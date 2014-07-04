@@ -58,11 +58,13 @@ static const int GRID_COLUMNS = 10;
             
             if(livingNeighbors == 3) {
                 currentCreature.isAlive = TRUE;
-                numAlive++;
             }
-            else if (livingNeighbors <= 1 || livingNeighbors >= 4)
-            {
+            else if (livingNeighbors <= 1 || livingNeighbors >= 4) {
                 currentCreature.isAlive = FALSE;
+            }
+            
+            if(currentCreature.isAlive) {
+                numAlive++;
             }
         }
     }
