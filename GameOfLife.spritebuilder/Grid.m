@@ -43,8 +43,6 @@ static const int GRID_COLUMNS = 10;
 
 - (void)updateCreatures
 {
-    int numAlive = 0;
-    
     // iterate through the rows
     // note that NSArray has a method 'count' that will return the number of elements in the array
     for (int i = 0; i < [_gridArray count]; i++)
@@ -62,14 +60,10 @@ static const int GRID_COLUMNS = 10;
             else if (livingNeighbors <= 1 || livingNeighbors >= 4) {
                 currentCreature.isAlive = FALSE;
             }
-            
-            if(currentCreature.isAlive) {
-                numAlive++;
-            }
         }
     }
     
-    _totalAlive = numAlive;
+    [self updatePopulation];
 }
 
 
@@ -113,6 +107,27 @@ static const int GRID_COLUMNS = 10;
             }
         }
     }
+}
+
+- (void)updatePopulation
+{
+    int numAlive = 0;
+    
+    for (int i = 0; i < [_gridArray count]; i++)
+    {
+        // iterate through all the columns for a given row
+        for (int j = 0; j < [_gridArray[i] count]; j++)
+        {
+            // access the creature in the cell that corresponds to the current row/column
+            Creature *currentCreature = _gridArray[i][j];
+            
+            if(currentCreature.isAlive) {
+                numAlive++;
+            }
+        }
+    }
+    
+    _totalAlive = numAlive;
 }
 
 - (BOOL)isIndexValidForX:(int)x andY:(int)y
@@ -169,6 +184,11 @@ static const int GRID_COLUMNS = 10;
     
     //invert it's state - kill it if it's alive, bring it to life if it's dead.
     creature.isAlive = !creature.isAlive;
+    
+    if(creature.isAlive)
+        _totalAlive++;
+    else
+        _totalAlive--;
 }
 
 - (Creature *)creatureForTouchPosition:(CGPoint)touchPosition
